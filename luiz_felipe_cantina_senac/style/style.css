@@ -1,0 +1,288 @@
+/*---------------------------------------------------------BODY/HEADER----------------------------------------------------------------------*/
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+ 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: aliceblue;
+    color: #222;
+}
+
+ 
+header {
+    background-color: #ffae00;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    border: 1px solid rgb(12, 0, 66) ;
+}
+ 
+nav {
+    width: 100%;
+}
+ 
+nav ul {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    list-style: none;
+}
+ 
+nav a {
+    color: rgb(25, 1, 133);
+    text-decoration: none;
+    font-weight: 900;
+}
+ 
+nav a:hover {
+color: aliceblue;
+}
+ 
+.logo {
+    width: 150px;
+}
+ 
+/*---------------------------------------------------------SOBRE-NOS----------------------------------------------------------------------*/
+ 
+.cafe-name {
+    text-align: center;
+    font-weight: 900;
+    
+}
+
+.image-cafeteria {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    height: auto;
+    border-radius: 35px;
+    padding: 1rem;
+    background-color: rgb(12, 0, 66);
+}
+
+.fig-cafe {
+    text-align: center;
+}
+ 
+.sobre-nos {
+    text-align: center;
+    font-weight: 400;
+    color: aliceblue;
+    padding: 45px;
+    margin: 2rem;
+    background-color: rgb(12, 0, 66);
+    border-radius: 25px;
+}
+   
+/*---------------------------------------------------------CARDAPIO----------------------------------------------------------------------*/
+ 
+.cardapio ul {
+    list-style: none;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    padding: 25px;
+    background-color: rgb(12, 0, 66);
+    border-radius: 15px;
+    margin: 1rem;
+    font-weight: 900;
+}
+ 
+.text-car {
+    margin-left: 50px;
+    color: rgb(0, 0, 0);
+    height: 4rem;
+    font-weight: 900;
+}
+
+.cardapio {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+gap: 20px;
+padding: auto;
+background-color: rgb(12, 0, 66);
+border-radius: 25px;
+margin: 2rem;
+}
+ 
+.cardapio ul{
+background-color: #f7c58b;
+padding: 25px 25px;
+border: 1px solid #ccc;
+
+}
+
+/*---------------------------------------------------------GALERIA----------------------------------------------------------------------*/
+
+.galeria-f {
+    margin-left: 20px;
+    color: rgb(0, 0, 0);
+    height: 2rem;
+    font-weight: 900;
+}
+
+figure {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+}
+ 
+figure img {
+    width: 245px;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+ 
+figcaption {
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+/*---------------------------------------------------------PROMOÇÕES----------------------------------------------------------------------*/
+
+.promo-text {
+    margin-left: 20px;
+    color: rgb(0, 0, 0);
+    height: 2rem;
+    font-weight: 900;
+    list-style: none;
+}
+
+.promo li {
+    list-style: none;
+}
+
+.promo {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+gap: 20px;
+padding: 1rem;
+background-color: rgb(12, 0, 66);
+border-radius: 25px;
+margin: 2rem;
+}
+ 
+.promo ul{
+background-color: #f7c58b;
+padding: 15px 15px;
+border: 1px solid rgb(12, 0, 66);
+border-radius: 15px;
+}
+
+/*---------------------------------------------------------ASIDE----------------------------------------------------------------------*/
+
+.anuncio {
+    display: flex;
+}
+
+.menu-navegacao, .anuncio {
+    text-align: center;
+    background-color: rgb(12, 0, 66);
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 25px;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    color: aliceblue;
+}
+
+.text-vertical {
+    writing-mode: vertical-rl;
+}
+
+.formulario {
+        display: flex;
+        width: 80%;
+        margin: 0 auto;
+    }
+ 
+    .formulario .form-cta {
+        width: 60%;
+        height: auto;
+        background-color: #05204a;
+        border-radius: 24px;
+        padding: 25px;
+        margin: 0 auto;
+    }
+ 
+    .form-cta h3{
+        text-align: center;
+        padding-bottom: 25px;
+        font-size: 32px;
+        font-weight: 600;
+        color: aliceblue;
+    }
+ 
+    .lead-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+ 
+    .form-row label {
+        color: white;
+        font-size: 24px;
+        font-weight: 500;
+    }
+ 
+    .form-row input {
+        height: 40px;
+        background-color: #f7c58b;
+        border: none;
+        border-radius: 12px;
+        padding: 25px;
+    }
+   
+    .form-row textarea {
+        height: 120px;
+        background-color: #f7c58b;
+        border: none;
+        border-radius: 12px;
+        padding: 8px 12px;
+        resize: none;
+    }
+ 
+    .lead-form .btn {
+        width: 200px;
+        height: 40px;
+        border-radius: 25px;
+        border: none;
+        background-color: #ffae00;
+        color: white;
+        margin: 0 auto;
+        font-size: 16px;
+        cursor: pointer;
+        transition: .3s;
+        text-align-last: center;
+    }
+
+    .teste {
+        display: flex;
+        padding: 40px;
+    }
+ 
+/*---------------------------------------------------------RODAPÉ----------------------------------------------------------------------*/
+
+.rodape {
+    background-color: #ffae00;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid rgb(12,0, 66);
+    text-align: center;
+    color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
