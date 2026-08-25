@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     "use strict";
- 
+
     const descriptions = {
         direction: {
             row: "Organiza os itens horizontalmente, da esquerda para a direita.",
@@ -100,27 +100,27 @@ document.addEventListener("DOMContentLoaded", () => {
             baseline: "Alinha a linha de base do Item 3 com a linha de base dos demais."
         }
     };
- 
+
     function getElement(selector) {
         const element = document.querySelector(selector);
- 
+
         if (!element) {
             console.warn(`Elemento não encontrado: ${selector}`);
         }
- 
+
         return element;
     }
- 
+
     function setActiveButton(button, selector) {
         document.querySelectorAll(selector).forEach(currentButton => {
             currentButton.classList.remove("active");
             currentButton.setAttribute("aria-pressed", "false");
         });
- 
+
         button.classList.add("active");
         button.setAttribute("aria-pressed", "true");
     }
- 
+
     function setActiveByValue(selector, dataKey, value) {
         document.querySelectorAll(selector).forEach(button => {
             const isActive = button.dataset[dataKey] === value;
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
             button.setAttribute("aria-pressed", String(isActive));
         });
     }
- 
+
     function createController({
         buttonSelector,
         targetSelector,
@@ -143,31 +143,31 @@ document.addEventListener("DOMContentLoaded", () => {
         const output = getElement(outputSelector);
         const description = getElement(descriptionSelector);
         const buttons = document.querySelectorAll(buttonSelector);
- 
+
         if (!target || !output || !description || buttons.length === 0) {
             return;
         }
- 
+
         buttons.forEach(button => {
             button.addEventListener("click", () => {
                 const value = button.dataset[datasetKey];
- 
+
                 if (typeof value !== "string") {
                     return;
                 }
- 
+
                 target.style[styleProperty] = value;
                 output.textContent = value;
                 description.textContent = descriptions[descriptionGroup][value] ?? "";
                 setActiveButton(button, buttonSelector);
- 
+
                 if (typeof afterChange === "function") {
                     afterChange(value);
                 }
             });
         });
     }
- 
+
     function resetController({
         buttonSelector,
         targetSelector,
@@ -182,44 +182,44 @@ document.addEventListener("DOMContentLoaded", () => {
         const target = getElement(targetSelector);
         const output = getElement(outputSelector);
         const description = getElement(descriptionSelector);
- 
+
         if (!target || !output || !description) {
             return;
         }
- 
+
         target.style[styleProperty] = defaultValue;
         output.textContent = defaultValue;
         description.textContent = descriptions[descriptionGroup][defaultValue] ?? "";
         setActiveByValue(buttonSelector, datasetKey, defaultValue);
- 
+
         if (typeof afterReset === "function") {
             afterReset(defaultValue);
         }
     }
- 
+
     function updateDirectionAxes(value) {
         const mainAxis = getElement(".direction-main-axis");
         const crossAxis = getElement(".direction-cross-axis");
- 
+
         if (!mainAxis || !crossAxis) {
             return;
         }
- 
+
         const isColumn = value.includes("column");
         const isReverse = value.includes("reverse");
- 
+
         mainAxis.textContent = isColumn
             ? `Eixo principal ${isReverse ? "↑" : "↓"}`
             : `Eixo principal ${isReverse ? "←" : "→"}`;
- 
+
         crossAxis.textContent = isColumn
             ? "Eixo secundário →"
             : "Eixo secundário ↓";
- 
+
         mainAxis.classList.toggle("vertical-axis-label", isColumn);
         crossAxis.classList.toggle("horizontal-axis-label", isColumn);
     }
- 
+
     createController({
         buttonSelector: "[data-direction]",
         targetSelector: ".direction-container",
@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
         descriptionGroup: "direction",
         afterChange: updateDirectionAxes
     });
- 
+
     createController({
         buttonSelector: "[data-justify]",
         targetSelector: ".justify-container",
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
         styleProperty: "justifyContent",
         descriptionGroup: "justify"
     });
- 
+
     createController({
         buttonSelector: "[data-align]",
         targetSelector: ".align-container",
@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
         styleProperty: "alignItems",
         descriptionGroup: "align"
     });
- 
+
     createController({
         buttonSelector: "[data-gap]",
         targetSelector: ".gap-container",
@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
         styleProperty: "gap",
         descriptionGroup: "gap"
     });
- 
+
     createController({
         buttonSelector: "[data-wrap]",
         targetSelector: ".wrap-container",
@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
         styleProperty: "flexWrap",
         descriptionGroup: "wrap"
     });
- 
+
     createController({
         buttonSelector: "[data-flow]",
         targetSelector: ".flow-container",
@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
         styleProperty: "flexFlow",
         descriptionGroup: "flow"
     });
- 
+
     createController({
         buttonSelector: "[data-align-content]",
         targetSelector: ".align-content-container",
@@ -290,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
         styleProperty: "alignContent",
         descriptionGroup: "alignContent"
     });
- 
+
     createController({
         buttonSelector: "[data-order]",
         targetSelector: ".item-order",
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
         styleProperty: "order",
         descriptionGroup: "order"
     });
- 
+
     createController({
         buttonSelector: "[data-grow]",
         targetSelector: ".item-grow",
@@ -310,7 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
         styleProperty: "flexGrow",
         descriptionGroup: "grow"
     });
- 
+
     createController({
         buttonSelector: "[data-shrink]",
         targetSelector: ".item-shrink",
@@ -320,7 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
         styleProperty: "flexShrink",
         descriptionGroup: "shrink"
     });
- 
+
     createController({
         buttonSelector: "[data-basis]",
         targetSelector: ".item-basis",
@@ -330,23 +330,23 @@ document.addEventListener("DOMContentLoaded", () => {
         styleProperty: "flexBasis",
         descriptionGroup: "basis"
     });
- 
+
     const flexItem = getElement(".item-flex");
     const flexGrowValue = getElement(".flex-grow-value");
     const flexShrinkValue = getElement(".flex-shrink-value");
     const flexBasisValue = getElement(".flex-basis-value");
- 
+
     function updateFlexDetails() {
         if (!flexItem || !flexGrowValue || !flexShrinkValue || !flexBasisValue) {
             return;
         }
- 
+
         const computedStyle = getComputedStyle(flexItem);
         flexGrowValue.textContent = computedStyle.flexGrow;
         flexShrinkValue.textContent = computedStyle.flexShrink;
         flexBasisValue.textContent = computedStyle.flexBasis;
     }
- 
+
     createController({
         buttonSelector: "[data-flex]",
         targetSelector: ".item-flex",
@@ -357,7 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
         descriptionGroup: "flex",
         afterChange: updateFlexDetails
     });
- 
+
     createController({
         buttonSelector: "[data-align-self]",
         targetSelector: ".item-align-self",
@@ -367,33 +367,33 @@ document.addEventListener("DOMContentLoaded", () => {
         styleProperty: "alignSelf",
         descriptionGroup: "alignSelf"
     });
- 
+
     const shrinkContainer = getElement(".shrink-container");
     const shrinkWidthButtons = document.querySelectorAll("[data-shrink-width]");
- 
+
     shrinkWidthButtons.forEach(button => {
         button.addEventListener("click", () => {
             if (!shrinkContainer) {
                 return;
             }
- 
+
             shrinkContainer.style.width = button.dataset.shrinkWidth;
             setActiveButton(button, "[data-shrink-width]");
         });
     });
- 
+
     document.querySelectorAll(".copy-button").forEach(button => {
         button.addEventListener("click", async () => {
             const property = button.dataset.copyProperty;
             const target = getElement(button.dataset.copyTarget);
- 
+
             if (!property || !target) {
                 return;
             }
- 
+
             const css = `${property}: ${target.textContent.trim()};`;
             const originalText = button.textContent;
- 
+
             try {
                 await navigator.clipboard.writeText(css);
                 button.textContent = "CSS copiado!";
@@ -402,14 +402,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Erro ao copiar CSS:", error);
                 button.textContent = "Não foi possível copiar";
             }
- 
+
             window.setTimeout(() => {
                 button.textContent = originalText;
                 button.classList.remove("copy-success");
             }, 1600);
         });
     });
- 
+
     const resetActions = {
         direction: () => resetController({
             buttonSelector: "[data-direction]",
@@ -513,7 +513,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 defaultValue: "1",
                 descriptionGroup: "shrink"
             });
- 
+
             if (shrinkContainer) {
                 shrinkContainer.style.width = "500px";
                 setActiveByValue("[data-shrink-width]", "shrinkWidth", "500px");
@@ -551,46 +551,46 @@ document.addEventListener("DOMContentLoaded", () => {
             descriptionGroup: "alignSelf"
         })
     };
- 
+
     document.querySelectorAll("[data-reset-section]").forEach(button => {
         button.addEventListener("click", () => {
             const section = button.dataset.resetSection;
- 
+
             if (section === "challenge") {
                 resetChallenge();
                 return;
             }
- 
+
             const action = resetActions[section];
- 
+
             if (typeof action === "function") {
                 action();
             }
         });
     });
- 
+
     const challengeContainer = getElement(".challenge-container");
     const challengeDirection = getElement(".challenge-direction");
     const challengeJustify = getElement(".challenge-justify");
     const challengeAlign = getElement(".challenge-align");
     const checkButton = getElement(".check-button");
     const challengeFeedback = getElement(".challenge-feedback");
- 
+
     function updateChallenge() {
         if (!challengeContainer || !challengeDirection || !challengeJustify || !challengeAlign) {
             return;
         }
- 
+
         challengeContainer.style.flexDirection = challengeDirection.value;
         challengeContainer.style.justifyContent = challengeJustify.value;
         challengeContainer.style.alignItems = challengeAlign.value;
     }
- 
+
     function resetChallenge() {
         if (!challengeDirection || !challengeJustify || !challengeAlign || !challengeFeedback) {
             return;
         }
- 
+
         challengeDirection.value = "row";
         challengeJustify.value = "flex-start";
         challengeAlign.value = "stretch";
@@ -598,24 +598,24 @@ document.addEventListener("DOMContentLoaded", () => {
         challengeFeedback.className = "challenge-feedback";
         updateChallenge();
     }
- 
+
     [challengeDirection, challengeJustify, challengeAlign].forEach(select => {
         if (select) {
             select.addEventListener("change", updateChallenge);
         }
     });
- 
+
     if (checkButton) {
         checkButton.addEventListener("click", () => {
             if (!challengeDirection || !challengeJustify || !challengeAlign || !challengeFeedback) {
                 return;
             }
- 
+
             const isCorrect =
                 challengeDirection.value === "row" &&
                 challengeJustify.value === "center" &&
                 challengeAlign.value === "center";
- 
+
             if (isCorrect) {
                 challengeFeedback.textContent = "Parabéns! Os itens estão centralizados nos dois eixos.";
                 challengeFeedback.className = "challenge-feedback success";
@@ -625,8 +625,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
- 
+
     updateFlexDetails();
     updateDirectionAxes("row");
     updateChallenge();
 });
+
+
+
